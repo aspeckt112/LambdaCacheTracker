@@ -42,7 +42,9 @@ async function fetchCaches(gameState) {
     }
 
     try {
-        document.getElementById("caches").outerHTML = renderChapters(chapters);
+        const container = document.getElementById("caches");
+
+        container.replaceChildren(renderChapters(chapters));
 
         requestAnimationFrame(() => {
             const firstCacheContainer = document.querySelector(".cache-container");
@@ -58,40 +60,66 @@ async function fetchCaches(gameState) {
 
 function renderChapters(chapters) {
     const wrapper = document.createElement("div");
+    const total = chapters.reduce(function (sum, chapter) {
+        return sum + chapter.caches.length;
+    }, 0);
+    const found = chapters.reduce(function (sum, chapter) {
+        return sum + chapter.caches.filter(function (cache) {
+            return cache.obtained;
+        }).length;
+    }, 0);
+
+    const heading = document.createElement("h2");
+    heading.textContent = "Your caches";
+    wrapper.appendChild(heading);
+
+    const summary = document.createElement("p");
+    summary.className = "cache-summary";
+    summary.textContent = "Found " + found + " of " + total + " lambda caches. " +
+        (found === total
+            ? "That's all of them — Lambda Locator complete."
+            : "Missing caches are the ones left unchecked.");
+    wrapper.appendChild(summary);
 
     for (const chapter of chapters) {
-        const heading = document.createElement("div");
+        const section = document.createElement("section");
+        section.className = "chapter";
 
         const h3 = document.createElement("h3");
         h3.textContent = chapter.title;
+        section.appendChild(h3);
 
-        const h4 = document.createElement("h4");
+        const guide = document.createElement("p");
+        guide.className = "chapter-guide";
         const link = document.createElement("a");
         link.href = chapter.videoLink;
-        link.textContent = chapter.videoLink;
-        h4.appendChild(link);
+        link.textContent = "Watch the chapter guide";
+        guide.appendChild(link);
+        section.appendChild(guide);
 
-        heading.appendChild(h3);
-        heading.appendChild(h4);
-        wrapper.appendChild(heading);
+        const list = document.createElement("ul");
+        list.className = "cache-list";
 
         for (const cache of chapter.caches) {
-            const cacheContainer = document.createElement("div");
-            cacheContainer.className = "cache-container";
+            const item = document.createElement("li");
+            item.className = "cache-container";
 
-            const h5 = document.createElement("h5");
-            h5.textContent = "Cache # " + cache.number;
+            const label = document.createElement("label");
 
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.disabled = true;
-            checkbox.defaultChecked = cache.obtained;
+            checkbox.checked = cache.obtained;
 
-            cacheContainer.appendChild(h5);
-            cacheContainer.appendChild(checkbox);
-            wrapper.appendChild(cacheContainer);
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(" Cache #" + cache.number));
+            item.appendChild(label);
+            list.appendChild(item);
         }
+
+        section.appendChild(list);
+        wrapper.appendChild(section);
     }
 
-    return wrapper.innerHTML;
+    return wrapper;
 }

@@ -3,52 +3,292 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Half Life 2 Lambda Cache Tracker</title>
+
+    <title>Half-Life 2 Lambda Cache Tracker — Lambda Locator Checklist</title>
+    <meta name="description" content="Upload your Half-Life 2 gamestate.txt to see which of the 45 Lambda Locator caches you've found — and which you still need. Free and fully private."/>
+    <link rel="canonical" href="https://aspeckt112.github.io/LambdaCacheTracker/"/>
+    <meta name="robots" content="index, follow, max-image-preview:large"/>
+    <meta name="theme-color" content="#151515"/>
+    <link rel="icon" href="favicon.ico" sizes="any"/>
     <link rel="stylesheet" href="css/site.css"/>
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="Lambda Cache Tracker"/>
+    <meta property="og:title" content="Half-Life 2 Lambda Cache Tracker"/>
+    <meta property="og:description" content="Upload your Half-Life 2 gamestate.txt to see which of the 45 Lambda Locator caches you've found — and which you still need."/>
+    <meta property="og:url" content="https://aspeckt112.github.io/LambdaCacheTracker/"/>
+    <meta property="og:locale" content="en_US"/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Half-Life 2 Lambda Cache Tracker"/>
+    <meta name="twitter:description" content="Upload your Half-Life 2 gamestate.txt to see which of the 45 Lambda Locator caches you've found — and which you still need."/>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Half-Life 2 Lambda Cache Tracker",
+      "url": "https://aspeckt112.github.io/LambdaCacheTracker/",
+      "description": "Upload your Half-Life 2 gamestate.txt to see which of the 45 Lambda Locator caches you have found, grouped by chapter, and which ones you still need.",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Any (web browser)",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Reads your Half-Life 2 gamestate.txt in the browser",
+        "Maps the 45 lambda caches to the 11 chapters they appear in",
+        "Shows found and missing caches for each chapter",
+        "Links a video guide for every chapter"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How many lambda caches are there in Half-Life 2?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There are 45 lambda caches in Half-Life 2, spread across 11 chapters from A Red Letter Day to Follow Freeman. Finding all of them completes the Lambda Locator achievement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find my gamestate.txt file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In Steam, right-click Half-Life 2, choose Properties, open the Installed Files tab and click Browse. Then open either the hl2 or hl2_complete folder — gamestate.txt sits at the top level."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I use the hl2 or hl2_complete folder?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use hl2_complete if you have Episode One and Episode Two installed, or the 20th Anniversary Edition of Half-Life 2. Otherwise use hl2."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my gamestate.txt uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The file is read locally in your browser and never leaves your computer; the site has no server-side component."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the tracker read from gamestate.txt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It extracts the data value from the GameState block entry with id 86. That value is a 45-bit mask: bit N-1 is set when cache N has been found, which is how the tool lists found and missing caches per chapter."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to install anything?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The tracker is a single static page with no dependencies, no build step and no account — open it in any modern browser."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 <div class="container">
     <div class="column column-10">
     </div>
     <div class="column column-80">
+        <header>
+            <h1>Half-Life 2 Lambda Cache Tracker</h1>
+            <p>Stuck trying to complete the Lambda Locator achievement in Half-Life 2? This tool helps you track down the
+                caches you've missed by reading your gamestate.txt file and showing you which of the 45 lambda caches
+                you've found and which ones are still missing.
+            </p>
+        </header>
+
         <main role="main">
-            <div>
-                <h1>Half Life 2 Lambda Cache Tracker</h1>
-                <p>Stuck trying to complete the Lambda Locator achievement in Half Life 2? This tool will help you track down the
-                    caches you've missed by reading your gamestate.txt file and letting you know which caches you've found and
-                    which ones you've missed.
-                </p>
-                <h2>This site is ugly!</h2>
-                <p>Fix it then! <a href="https://github.com/aspeckt112/LambdaCacheTracker">The source code is available on
-                        GitHub</a>.
-                </p>
-                <div class="explanation">
-                    <h2>How do I find my gamestate.txt file?</h2>
-                    <p>Regardless of which operating system you're using, the easiest way to find your gamestate.txt file is to open the properties of
-                        Half Life 2 in your Steam library:
-                    </p>
-                    <img src="images/game_properties.png" alt="Game Properties" style="max-width: 98%;"/>
-                    <p>In the box that pops up, click "Installed Files" and then click the "Browse" button:</p>
-                    <img src="images/installed_files.png" alt="Installed Files" style="max-width: 98%;"/>
-                    <p>From there, you can navigate to <b>either</b> the "hl2" directory <b>or</b> the "hl2_complete" directory:</p>
-                    <p><i>The "hl2_complete" directory is present if you have Half Life 2, Episode One and Episode Two installed
-                            <b>or</b> if you have the 20th Anniversary Edition of Half Life 2 installed.</i>
-                    </p>
-                    <img src="images/file_explorer.png" alt="File Explorer" style="max-width: 98%;"/>
-                    <p>Once you're in the correct directory, you should see the gamestate.txt file:</p>
-                    <img src="images/game_state_file.png" alt="gamestate.txt" style="max-width: 98%;"/>
-                </div>
+            <section id="check">
+                <h2>Check your caches</h2>
+                <p>Upload the gamestate.txt file from your Half-Life 2 install directory. Everything is processed in
+                    your browser — the file is never sent to a server.</p>
                 <form id="uploadForm" enctype="multipart/form-data" method="post" class="upload-form">
                     <div>
-                        <label for="file-upload" class="custom-file-upload">
-                            Upload gamestate.txt
-                        </label>
-                        <input id="file-upload" type="file" name="Upload" />
+                        <label for="file-upload" class="custom-file-upload">Upload gamestate.txt</label>
+                        <input id="file-upload" class="visually-hidden" type="file" name="Upload"
+                               accept=".txt,text/plain"/>
                     </div>
                 </form>
-                <div id="caches"></div>
-            </div>
+                <noscript>
+                    <p>The tracker needs JavaScript to read your gamestate.txt file. Enable JavaScript and reload the
+                        page.</p>
+                </noscript>
+                <div id="caches" aria-live="polite"></div>
+            </section>
+
+            <section class="explanation" id="gamestate">
+                <h2>How do I find my gamestate.txt file?</h2>
+                <p>Regardless of which operating system you're using, the easiest way to find your gamestate.txt file is
+                    to open the properties of Half-Life 2 in your Steam library:
+                </p>
+                <img src="images/game_properties.png" class="screenshot" width="339" height="242"
+                     loading="lazy" decoding="async"
+                     alt="Steam library properties dialog for Half-Life 2"/>
+                <p>In the box that pops up, click "Installed Files" and then click the "Browse" button:</p>
+                <img src="images/installed_files.png" class="screenshot" width="886" height="625"
+                     loading="lazy" decoding="async"
+                     alt="Installed Files tab showing the Browse button for the Half-Life 2 install folder"/>
+                <p>From there, you can navigate to <b>either</b> the "hl2" directory <b>or</b> the "hl2_complete"
+                    directory:</p>
+                <p><i>The "hl2_complete" directory is present if you have Half-Life 2, Episode One and Episode Two
+                        installed <b>or</b> if you have the 20th Anniversary Edition of Half-Life 2 installed.</i>
+                </p>
+                <img src="images/file_explorer.png" class="screenshot" width="737" height="446"
+                     loading="lazy" decoding="async"
+                     alt="File Explorer showing the hl2 and hl2_complete folders in the Half-Life 2 install directory"/>
+                <p>Once you're in the correct directory, you should see the gamestate.txt file:</p>
+                <img src="images/game_state_file.png" class="screenshot" width="685" height="93"
+                     loading="lazy" decoding="async"
+                     alt="gamestate.txt at the top level of the hl2 folder"/>
+            </section>
+
+            <section id="caches-by-chapter">
+                <h2>All 45 lambda caches, by chapter</h2>
+                <p>Half-Life 2 hides 45 lambda caches across 11 chapters. This table shows how many are in each chapter,
+                    in the order you encounter them, with a timestamped video guide for every chapter.</p>
+                <table class="chapter-table">
+                    <caption>Lambda cache counts for each chapter of Half-Life 2</caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Chapter</th>
+                        <th scope="col">Caches</th>
+                        <th scope="col">Running total</th>
+                        <th scope="col">Video guide</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">A Red Letter Day</th>
+                        <td>1</td>
+                        <td>1</td>
+                        <td><a href="https://www.youtube.com/watch?v=8be_82sx5_w&amp;t=0s">0:00</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Route Kanal</th>
+                        <td>7</td>
+                        <td>8</td>
+                        <td><a href="https://www.youtube.com/watch?v=8be_82sx5_w&amp;t=5s">0:05</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Water Hazard</th>
+                        <td>10</td>
+                        <td>18</td>
+                        <td><a href="https://www.youtube.com/watch?v=8be_82sx5_w&amp;t=76s">1:16</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Black Mesa East</th>
+                        <td>1</td>
+                        <td>19</td>
+                        <td><a href="https://www.youtube.com/watch?v=8be_82sx5_w&amp;t=251s">4:11</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">We Don't Go To Ravenholm</th>
+                        <td>4</td>
+                        <td>23</td>
+                        <td><a href="https://www.youtube.com/watch?v=8be_82sx5_w&amp;t=260s">4:20</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Highway 17</th>
+                        <td>5</td>
+                        <td>28</td>
+                        <td><a href="https://www.youtube.com/watch?v=8be_82sx5_w&amp;t=322s">5:22</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Sandtraps</th>
+                        <td>2</td>
+                        <td>30</td>
+                        <td><a href="https://www.youtube.com/watch?v=8be_82sx5_w&amp;t=424s">7:04</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nova Prospekt</th>
+                        <td>3</td>
+                        <td>33</td>
+                        <td><a href="https://www.youtube.com/watch?v=8be_82sx5_w&amp;t=465s">7:45</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Entanglement</th>
+                        <td>1</td>
+                        <td>34</td>
+                        <td><a href="https://www.youtube.com/watch?v=8be_82sx5_w&amp;t=496s">8:16</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Anticitizen One</th>
+                        <td>10</td>
+                        <td>44</td>
+                        <td><a href="https://www.youtube.com/watch?v=8be_82sx5_w&amp;t=505s">8:25</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Follow Freeman</th>
+                        <td>1</td>
+                        <td>45</td>
+                        <td><a href="https://www.youtube.com/watch?v=8be_82sx5_w&amp;t=636s">10:36</a></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th scope="row">Total</th>
+                        <td>45</td>
+                        <td colspan="2">Lambda Locator achievement</td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </section>
+
+            <section id="faq">
+                <h2>Frequently asked questions</h2>
+
+                <h3>How many lambda caches are there in Half-Life 2?</h3>
+                <p>There are 45 lambda caches in Half-Life 2, spread across 11 chapters from A Red Letter Day to Follow
+                    Freeman. Finding all of them completes the Lambda Locator achievement.</p>
+
+                <h3>How do I find my gamestate.txt file?</h3>
+                <p>In Steam, right-click Half-Life 2, choose Properties, open the Installed Files tab and click Browse.
+                    Then open either the <code>hl2</code> or <code>hl2_complete</code> folder — gamestate.txt sits at the
+                    top level.</p>
+
+                <h3>Should I use the hl2 or hl2_complete folder?</h3>
+                <p>Use <code>hl2_complete</code> if you have Episode One and Episode Two installed, or the 20th
+                    Anniversary Edition of Half-Life 2. Otherwise use <code>hl2</code>.</p>
+
+                <h3>Is my gamestate.txt uploaded to a server?</h3>
+                <p>No. The file is read locally in your browser and never leaves your computer; the site has no
+                    server-side component.</p>
+
+                <h3>What does the tracker read from gamestate.txt?</h3>
+                <p>It extracts the <code>data</code> value from the <code>GameState</code> block entry with
+                    <code>id 86</code>. That value is a 45-bit mask: bit <i>N-1</i> is set when cache <i>N</i> has been
+                    found, which is how the tool lists found and missing caches per chapter.</p>
+
+                <h3>Do I need to install anything?</h3>
+                <p>No. The tracker is a single static page with no dependencies, no build step and no account — open it
+                    in any modern browser.</p>
+            </section>
         </main>
+
+        <footer>
+            <p><a href="https://github.com/aspeckt112/LambdaCacheTracker">Source code on GitHub</a> · MIT licensed ·
+                Last updated <time datetime="2026-10-25">25 October 2026</time></p>
+        </footer>
     </div>
     <div class="column column-10">
     </div>

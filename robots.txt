@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aspeckt112.github.io/LambdaCacheTracker/sitemap.xml

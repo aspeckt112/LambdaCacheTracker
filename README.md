@@ -62,13 +62,35 @@ mapping.
 
 | Path                       | Purpose                                              |
 | -------------------------- | ---------------------------------------------------- |
-| `index.html`               | Single page: instructions and the upload control      |
+| `index.html`               | Single page: instructions, cache table, FAQ, upload   |
 | `js/game-state.js`         | Parsing and bitmask logic (pure; exported for tests)  |
 | `js/site.js`               | DOM wiring and rendering                             |
 | `css/site.css`             | Styling                                              |
 | `tests/game-state.test.js` | Unit tests for the parsing logic                     |
 | `images/`                  | Screenshots used in the on-page instructions         |
 | `docs/gamestate.txt`       | Sample `gamestate.txt` for development               |
+| `sitemap.xml`              | Single-URL sitemap for search engines                |
+| `robots.txt`               | Crawl directives (see the note below)                |
+
+## Hosting and SEO
+
+The site is published with GitHub Pages at
+<https://aspeckt112.github.io/LambdaCacheTracker/>. Because it lives on a project
+subpath:
+
+- The canonical URL in `index.html` and the URL in `sitemap.xml` must keep the
+  trailing slash and the `/LambdaCacheTracker/` prefix. GitHub Pages also serves
+  `/index.html`, so the canonical tag is what prevents a duplicate-URL split.
+- `robots.txt` is only read from the origin root
+  (`https://aspeckt112.github.io/robots.txt`), so this copy is **not** used by
+  crawlers. Nothing is blocked, so the page is indexable regardless; submit
+  `sitemap.xml` directly in Search Console instead.
+- `.nojekyll` makes Pages serve files verbatim instead of running a Jekyll build.
+
+After deploying, submit the sitemap in Google Search Console (URL-prefix property
+for the subpath) and optionally in Bing Webmaster Tools. Update `<lastmod>` in
+`sitemap.xml` and the `<time>` in the page footer when the content changes.
+
 
 ## License
 
