@@ -10,7 +10,7 @@ Everything runs in your browser — the file you upload is never sent anywhere.
 
 1. Open `index.html` (or the hosted site).
 2. Click **Upload gamestate.txt** and pick the file from your Half-Life 2 install.
-3. Found caches are checked; missing ones are not.
+3. Found caches are filled in and ticked; missing ones are outlined and hollow.
 
 ### Where is gamestate.txt?
 
