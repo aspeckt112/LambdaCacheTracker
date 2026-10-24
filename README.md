@@ -92,6 +92,14 @@ for the subpath) and optionally in Bing Webmaster Tools. Update `<lastmod>` in
 `sitemap.xml` and the `<time>` in the page footer when the content changes.
 
 
+## Thanks
+
+YouTuber [Minxy](https://www.youtube.com/@minxy3805) uploaded a fantastic "get right to the point"
+video on where to find all the caches. I used this video to verify the cache locations for myself,
+and the chapter guides on the site link to it. Thanks!
+
+Valve, for making Half-Life 2. It's a great game.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
